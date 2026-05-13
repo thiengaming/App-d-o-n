@@ -1,0 +1,2416 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MotoMarket — Định Giá Xe Máy Cũ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF8F4;
+      --cream2: #F2EDE4;
+      --cream3: #E8E0D0;
+      --ink: #1A1612;
+      --ink2: #3D3530;
+      --ink3: #7A6E62;
+      --gold: #B8860B;
+      --gold2: #D4A017;
+      --gold-lt: #F0D070;
+      --gold-bg: #FDF8E8;
+      --rust: #C45A3A;
+      --rust-bg: #FDF0EB;
+      --sage: #5A7A5C;
+      --sage-bg: #EEF4EE;
+      --border: #DDD5C4;
+      --border2: #C8BCA8;
+      --tab-h: 44px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 900px 600px at 78% 8%, rgba(184, 134, 11, .06) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 400px at 8% 92%, rgba(196, 90, 58, .04) 0%, transparent 60%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(184, 134, 11, .05) 79px, rgba(184, 134, 11, .05) 80px);
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      z-index: 10;
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+      padding: 36px 52px 18px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .logo-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 60px;
+      font-weight: 700;
+      line-height: .9;
+      letter-spacing: -2px;
+      color: var(--ink);
+    }
+
+    .logo-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hdr-stats {
+      text-align: right;
+      padding-bottom: 4px;
+    }
+
+    .hdr-stats p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--ink3);
+      line-height: 2.1;
+    }
+
+    .hdr-stats strong {
+      color: var(--ink2);
+      font-weight: 500;
+    }
+
+    /* LAYOUT */
+    .app {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      min-height: calc(100vh - 116px);
+    }
+
+    /* FORM PANEL */
+    .form-panel {
+      border-right: 2px solid var(--ink);
+      padding: 36px 36px 60px;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .form-panel::before {
+      content: 'THÔNG TIN XE';
+      position: absolute;
+      top: 44px;
+      right: -1px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 5px;
+      color: var(--border2);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      pointer-events: none;
+      opacity: .45;
+    }
+
+    .panel-title {
+      margin-bottom: 24px;
+    }
+
+    .panel-title .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .panel-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    /* FIELDS */
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+      margin-bottom: 15px;
+    }
+
+    .row2 .field {
+      margin-bottom: 0;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field label {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 6px;
+    }
+
+    select,
+    input[type=number] {
+      width: 100%;
+      background: var(--cream2);
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      padding: 10px 13px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 5px;
+      appearance: none;
+      -webkit-appearance: none;
+      outline: none;
+      cursor: pointer;
+      transition: border-color .15s, background-color .15s, box-shadow .15s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%237A6E62' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+
+    input[type=number] {
+      background-image: none;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: var(--gold);
+      background-color: var(--gold-bg);
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, .1);
+    }
+
+    select option {
+      background: #FAF8F4;
+      color: #1A1612;
+    }
+
+    .no-model-notice {
+      display: none;
+      margin-top: 6px;
+      padding: 8px 11px;
+      background: #FDF5E0;
+      border-radius: 4px;
+      border-left: 2.5px solid var(--gold2);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: #7A5C1A;
+      line-height: 1.5;
+    }
+
+    .no-model-notice.show {
+      display: block;
+    }
+
+    /* CONDITION PILLS */
+    .cond-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin-bottom: 15px;
+    }
+
+    .cond-pill {
+      padding: 12px 10px;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      background: var(--cream2);
+      cursor: pointer;
+      text-align: center;
+      transition: all .15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cond-pill::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity .15s;
+    }
+
+    .cond-pill.active {
+      border-color: var(--gold);
+      background: var(--gold-bg);
+    }
+
+    .cond-pill.active::after {
+      opacity: 1;
+    }
+
+    .cond-pill:hover:not(.active) {
+      border-color: var(--border2);
+      background: var(--cream3);
+    }
+
+    .pill-icon {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .pill-name {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+
+    .pill-fx {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--ink3);
+    }
+
+    .cond-pill.active .pill-fx {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* SCORE */
+    .score-row {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 13px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .score-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold);
+      text-align: center;
+    }
+
+    .score-lbl {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--ink3);
+      margin-bottom: 8px;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      border: none;
+      padding: 0;
+      background-image: none;
+      cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--ink);
+      border: 3px solid var(--cream);
+      box-shadow: 0 0 0 1.5px var(--gold);
+      transition: transform .12s;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .form-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    /* BUTTON */
+    .btn-predict {
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--ink);
+      border: none;
+      border-radius: 5px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cream);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all .18s;
+    }
+
+    .btn-predict::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 160, 23, .2), transparent);
+      transition: left .4s;
+    }
+
+    .btn-predict:hover {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .btn-predict:hover::before {
+      left: 100%;
+    }
+
+    .btn-predict:active {
+      transform: scale(.99);
+    }
+
+    /* RESULT PANEL */
+    .result-panel {
+      padding: 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* EMPTY */
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+      padding: 60px 40px;
+    }
+
+    .empty-rings {
+      position: relative;
+      width: 116px;
+      height: 116px;
+      margin: 0 auto;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      animation: prng 3s ease-in-out infinite;
+    }
+
+    .ring:nth-child(1) {
+      inset: 29px;
+      border: 1.5px solid var(--gold-lt);
+      animation-delay: 0s;
+    }
+
+    .ring:nth-child(2) {
+      inset: 14px;
+      border: 1.5px solid var(--border);
+      animation-delay: .4s;
+    }
+
+    .ring:nth-child(3) {
+      inset: 0;
+      border: 1.5px solid var(--cream3);
+      animation-delay: .8s;
+    }
+
+    .ring-center {
+      position: absolute;
+      inset: 40px;
+      background: var(--gold-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      border: 1px solid var(--gold-lt);
+    }
+
+    @keyframes prng {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .45;
+        transform: scale(1.05);
+      }
+    }
+
+    .empty-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px;
+      font-weight: 700;
+      color: var(--ink2);
+    }
+
+    .empty-sub {
+      font-size: 13px;
+      color: var(--ink3);
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    /* TABS */
+    .tabs-bar {
+      display: flex;
+      border-bottom: 2px solid var(--ink);
+      background: var(--cream);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .tab-btn {
+      flex: 1;
+      height: var(--tab-h);
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--ink3);
+      border-right: 1px solid var(--border);
+      transition: all .15s;
+      position: relative;
+    }
+
+    .tab-btn:last-child {
+      border-right: none;
+    }
+
+    .tab-btn.active {
+      color: var(--ink);
+      background: var(--gold-bg);
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: var(--cream2);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 32px 44px 60px;
+      flex: 1;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* PRICE HERO */
+    .price-hero {
+      padding-bottom: 28px;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .price-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 7px;
+    }
+
+    .price-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 68px;
+      font-weight: 700;
+      line-height: .9;
+      letter-spacing: -2px;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+
+    .price-unit {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--ink3);
+      margin-bottom: 8px;
+    }
+
+    .price-xe {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink2);
+    }
+
+    /* SEC HEAD */
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .sec-head h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .sec-head span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      color: var(--ink3);
+      letter-spacing: 1px;
+    }
+
+    /* MARKET BAR */
+    .market-section {
+      margin-bottom: 28px;
+    }
+
+    .chart-box {
+      background: var(--cream2);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 18px 18px 14px;
+    }
+
+    .spectrum-wrap {
+      padding: 26px 0 12px;
+      position: relative;
+    }
+
+    .spectrum-track {
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--sage-bg) 0%, var(--gold-bg) 50%, var(--rust-bg) 100%);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .needle-line {
+      position: absolute;
+      top: -22px;
+      bottom: -12px;
+      width: 2px;
+      background: var(--ink);
+      transform: translateX(-50%);
+      border-radius: 1px;
+      transition: left .85s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .needle-dot {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--ink);
+      border: 2.5px solid var(--cream);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .14);
+    }
+
+    .needle-tag {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .needle-tag::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: var(--ink);
+      border-bottom: none;
+    }
+
+    .spectrum-ends {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .spec-end {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--ink3);
+      line-height: 1.65;
+    }
+
+    .spec-end strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink2);
+    }
+
+    .market-pos {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 11px 14px;
+      background: var(--cream2);
+      border-radius: 5px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .mpos-icon {
+      font-size: 15px;
+    }
+
+    .mpos-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink2);
+    }
+
+    .mpos-sub {
+      font-size: 11px;
+      color: var(--ink3);
+      margin-top: 1px;
+    }
+
+    /* REASONS */
+    .reasons-section {
+      margin-bottom: 28px;
+    }
+
+    .reason-item {
+      display: grid;
+      grid-template-columns: 44px 1fr 62px;
+      gap: 12px;
+      align-items: start;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--cream3);
+    }
+
+    .reason-item:first-child {
+      border-top: 1px solid var(--cream3);
+    }
+
+    .reason-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--cream2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .reason-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .reason-detail {
+      font-size: 11px;
+      color: var(--ink3);
+      line-height: 1.5;
+    }
+
+    .impact-tag {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 7px;
+      border-radius: 3px;
+      margin-top: 3px;
+    }
+
+    .tag-pos {
+      background: var(--sage-bg);
+      color: var(--sage);
+      border: 1px solid rgba(90, 122, 92, .2);
+    }
+
+    .tag-neg {
+      background: var(--rust-bg);
+      color: var(--rust);
+      border: 1px solid rgba(196, 90, 58, .2);
+    }
+
+    .tag-neu {
+      background: var(--cream2);
+      color: var(--ink3);
+      border: 1px solid var(--border);
+    }
+
+    /* NEGO */
+    .nego-section {
+      margin-bottom: 28px;
+    }
+
+    .nego-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .nego-card {
+      background: var(--cream2);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 15px;
+      transition: border-color .15s;
+    }
+
+    .nego-card:hover {
+      border-color: var(--gold);
+    }
+
+    .nego-icon {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .nego-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .nego-body {
+      font-size: 11px;
+      color: var(--ink3);
+      line-height: 1.55;
+    }
+
+    .nego-price {
+      margin-top: 8px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* SHARE */
+    .share-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1.5px solid var(--border);
+    }
+
+    .share-btn {
+      flex: 1;
+      padding: 11px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      background: var(--cream2);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink2);
+      cursor: pointer;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .share-btn:hover {
+      border-color: var(--gold);
+      background: var(--gold-bg);
+      color: var(--ink);
+    }
+
+    .share-btn.done {
+      border-color: var(--sage);
+      background: var(--sage-bg);
+      color: var(--sage);
+    }
+
+    /* ── TAB 2: FUTURE FORECAST ── */
+    .forecast-intro {
+      font-size: 13px;
+      color: var(--ink3);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      background: var(--cream2);
+      border-radius: 5px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .forecast-chart-wrap {
+      background: var(--cream2);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 24px 20px 16px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .fc-svg {
+      width: 100%;
+      height: 220px;
+      overflow: visible;
+    }
+
+    .fc-axis-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      fill: var(--ink3);
+    }
+
+    .fc-line-hist {
+      stroke: var(--border2);
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 4, 3;
+    }
+
+    .fc-line-future {
+      stroke: var(--gold2);
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    .fc-area-future {
+      fill: var(--gold-bg);
+      opacity: .5;
+    }
+
+    .fc-dot {
+      fill: var(--ink);
+      stroke: var(--cream);
+      stroke-width: 2;
+    }
+
+    .fc-dot-future {
+      fill: var(--gold);
+      stroke: var(--cream);
+      stroke-width: 2;
+    }
+
+    .fc-dot-now {
+      fill: var(--rust);
+      stroke: var(--cream);
+      stroke-width: 2.5;
+    }
+
+    .fc-legend {
+      display: flex;
+      gap: 20px;
+      margin-top: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      color: var(--ink3);
+    }
+
+    .fc-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .fc-legend-line {
+      width: 22px;
+      height: 2px;
+    }
+
+    .fc-legend-line.hist {
+      background: var(--border2);
+      border-top: 2px dashed var(--border2);
+    }
+
+    .fc-legend-line.future {
+      background: var(--gold2);
+    }
+
+    .forecast-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .forecast-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--ink3);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1.5px solid var(--border);
+    }
+
+    .forecast-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--cream3);
+      color: var(--ink2);
+    }
+
+    .forecast-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .forecast-table td:last-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .forecast-table .now-row td {
+      background: var(--gold-bg);
+      font-weight: 600;
+    }
+
+    .forecast-table .now-row td:first-child::before {
+      content: '→ ';
+      color: var(--rust);
+    }
+
+    /* ── TAB 3: SIMULATOR ── */
+    .sim-section {
+      margin-bottom: 28px;
+    }
+
+    .sim-intro {
+      font-size: 13px;
+      color: var(--ink3);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      background: var(--cream2);
+      border-radius: 5px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .sim-controls {
+      background: var(--cream2);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .sim-ctrl-row {
+      margin-bottom: 18px;
+    }
+
+    .sim-ctrl-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .sim-ctrl-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .sim-ctrl-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+
+    .sim-ctrl-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    input.sim-range {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      border: none;
+      padding: 0;
+      background-image: none;
+      cursor: pointer;
+    }
+
+    input.sim-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 3px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--gold);
+      transition: transform .12s;
+    }
+
+    input.sim-range::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .sim-result-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .sim-card {
+      background: var(--cream2);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+    }
+
+    .sim-card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 6px;
+    }
+
+    .sim-card-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .sim-card-val.highlight {
+      color: var(--gold);
+    }
+
+    .sim-card-val.positive {
+      color: var(--sage);
+    }
+
+    .sim-card-val.negative {
+      color: var(--rust);
+    }
+
+    .sim-card-sub {
+      font-size: 11px;
+      color: var(--ink3);
+      margin-top: 4px;
+    }
+
+    .sim-bar-wrap {
+      background: var(--cream2);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+    }
+
+    .sim-bar-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 14px;
+    }
+
+    .sim-factor-row {
+      margin-bottom: 14px;
+    }
+
+    .sim-factor-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .sim-factor-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .sim-factor-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink2);
+    }
+
+    .sim-factor-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .sim-factor-bar-bg {
+      height: 5px;
+      background: var(--cream3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .sim-factor-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width .5s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .fill-pos {
+      background: var(--sage);
+    }
+
+    .fill-neg {
+      background: var(--rust);
+    }
+
+    .fill-neu {
+      background: var(--border2);
+    }
+
+    .err {
+      border-color: var(--rust) !important;
+      background: var(--rust-bg) !important;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(13px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .au {
+      animation: fadeUp .38s ease forwards;
+      opacity: 0;
+    }
+
+    .d1 {
+      animation-delay: .04s
+    }
+
+    .d2 {
+      animation-delay: .1s
+    }
+
+    .d3 {
+      animation-delay: .16s
+    }
+
+    .d4 {
+      animation-delay: .22s
+    }
+
+    .d5 {
+      animation-delay: .28s
+    }
+
+    @media(max-width:860px) {
+      header {
+        padding: 20px 20px 14px;
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .logo-name {
+        font-size: 42px;
+      }
+
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .form-panel {
+        border-right: none;
+        border-bottom: 2px solid var(--ink);
+        padding: 24px 20px;
+      }
+
+      .form-panel::before {
+        display: none;
+      }
+
+      .tab-content {
+        padding: 24px 20px 40px;
+      }
+
+      .price-main {
+        font-size: 48px;
+      }
+
+      .nego-grid,
+      .sim-result-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       ANTIGRAVITY LUXURY — CSS Override
+       Cream & Gold · Glassmorphism · Float
+       ═══════════════════════════════════════════ */
+    :root {
+      --ag-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --ag-glass-bg: rgba(250, 248, 244, 0.55);
+      --ag-glass-border: rgba(184, 134, 11, 0.13);
+      --ag-glass-blur: 18px;
+      --ag-shadow-float: 0 8px 32px rgba(26, 22, 18, 0.06), 0 2px 12px rgba(184, 134, 11, 0.05);
+      --ag-shadow-hover: 0 16px 48px rgba(26, 22, 18, 0.1), 0 4px 20px rgba(184, 134, 11, 0.1);
+      --ag-glow: 0 0 20px rgba(212, 160, 23, 0.15);
+    }
+
+    body::before {
+      background:
+        radial-gradient(ellipse 1000px 700px at 78% 8%, rgba(184, 134, 11, .08) 0%, transparent 70%),
+        radial-gradient(ellipse 700px 500px at 8% 92%, rgba(196, 90, 58, .05) 0%, transparent 60%),
+        radial-gradient(ellipse 500px 500px at 50% 50%, rgba(240, 208, 112, .04) 0%, transparent 60%);
+    }
+
+    header {
+      background: var(--ag-glass-bg) !important;
+      backdrop-filter: blur(var(--ag-glass-blur));
+      -webkit-backdrop-filter: blur(var(--ag-glass-blur));
+      border-bottom: 1.5px solid var(--ag-glass-border) !important;
+      box-shadow: var(--ag-shadow-float);
+      transition: box-shadow 0.5s var(--ag-ease);
+    }
+
+    .form-panel {
+      background: var(--ag-glass-bg);
+      backdrop-filter: blur(var(--ag-glass-blur));
+      -webkit-backdrop-filter: blur(var(--ag-glass-blur));
+      border-right: 1.5px solid var(--ag-glass-border) !important;
+      box-shadow: var(--ag-shadow-float);
+      transition: box-shadow 0.6s var(--ag-ease);
+    }
+
+    .result-panel {
+      background: rgba(250, 248, 244, 0.35);
+      /* blur removed */
+      -webkit-
+      /* blur removed */
+    }
+
+    select,
+    input[type=number] {
+      background: rgba(242, 237, 228, 0.6) !important;
+      /* blur removed */
+      border: 1.5px solid rgba(221, 213, 196, 0.6) !important;
+      transition: transform 0.45s var(--ag-ease), box-shadow 0.45s var(--ag-ease), border-color 0.45s var(--ag-ease), background 0.45s var(--ag-ease) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    select:focus,
+    input:focus {
+      border-color: var(--gold) !important;
+      background: rgba(253, 248, 232, 0.8) !important;
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, .12), var(--ag-glow) !important;
+      transform: translateY(-1px);
+    }
+
+    .cond-pill {
+      background: rgba(242, 237, 228, 0.5) !important;
+      /* blur removed */
+      border: 1.5px solid rgba(221, 213, 196, 0.5) !important;
+      transition: transform 0.45s var(--ag-ease), box-shadow 0.45s var(--ag-ease), border-color 0.45s var(--ag-ease), background 0.45s var(--ag-ease) !important;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .cond-pill::after {
+      transition: opacity 0.45s var(--ag-ease) !important;
+    }
+
+    .cond-pill:hover:not(.active) {
+      transform: translateY(-3px);
+      box-shadow: var(--ag-shadow-float);
+      border-color: rgba(184, 134, 11, 0.25) !important;
+    }
+
+    .cond-pill.active {
+      background: rgba(253, 248, 232, 0.7) !important;
+      border-color: var(--gold) !important;
+      box-shadow: var(--ag-shadow-float), var(--ag-glow);
+      transform: translateY(-2px);
+    }
+
+    .btn-predict {
+      transition: transform 0.5s var(--ag-ease), box-shadow 0.5s var(--ag-ease), border-color 0.5s var(--ag-ease) !important;
+      box-shadow: 0 4px 20px rgba(26, 22, 18, 0.15);
+      animation: agFloat 4s var(--ag-ease) infinite;
+    }
+
+    .btn-predict::before {
+      transition: left 0.6s var(--ag-ease) !important;
+    }
+
+    .btn-predict:hover {
+      transform: translateY(-4px) !important;
+      box-shadow: 0 12px 36px rgba(184, 134, 11, 0.25), var(--ag-glow) !important;
+    }
+
+    .btn-predict:active {
+      transform: translateY(-1px) scale(0.99) !important;
+    }
+
+    .empty-rings {
+      animation: agFloat 5s var(--ag-ease) infinite;
+    }
+
+    .ring {
+      animation: prng 3s var(--ag-ease) infinite !important;
+    }
+
+    .ring-center {
+      box-shadow: var(--ag-shadow-float);
+      /* blur removed */
+      animation: agFloatSlow 6s var(--ag-ease) infinite;
+    }
+
+    .tabs-bar {
+      background: var(--ag-glass-bg) !important;
+      backdrop-filter: blur(var(--ag-glass-blur));
+      -webkit-backdrop-filter: blur(var(--ag-glass-blur));
+      border-bottom: 1.5px solid var(--ag-glass-border) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .tab-btn {
+      transition: transform 0.45s var(--ag-ease), box-shadow 0.45s var(--ag-ease), border-color 0.45s var(--ag-ease), background 0.45s var(--ag-ease) !important;
+      border-right: 1px solid rgba(221, 213, 196, 0.4) !important;
+    }
+
+    .tab-btn.active {
+      background: rgba(253, 248, 232, 0.6) !important;
+    }
+
+    .tab-btn.active::after {
+      box-shadow: 0 0 8px rgba(184, 134, 11, 0.3);
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: rgba(242, 237, 228, 0.5) !important;
+      transform: translateY(-1px);
+    }
+
+    .chart-box,
+    .forecast-chart-wrap,
+    .sim-controls,
+    .sim-bar-wrap {
+      background: rgba(242, 237, 228, 0.45) !important;
+      /* blur removed */
+      -webkit-
+      /* blur removed */
+      border: 1.5px solid var(--ag-glass-border) !important;
+      box-shadow: var(--ag-shadow-float);
+      transition: transform 0.5s var(--ag-ease), box-shadow 0.5s var(--ag-ease), border-color 0.5s var(--ag-ease);
+    }
+
+    .chart-box:hover,
+    .forecast-chart-wrap:hover,
+    .sim-controls:hover,
+    .sim-bar-wrap:hover {
+      box-shadow: var(--ag-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .nego-card {
+      background: rgba(242, 237, 228, 0.45) !important;
+      /* blur removed */
+      border: 1.5px solid rgba(221, 213, 196, 0.4) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: transform 0.5s var(--ag-ease), box-shadow 0.5s var(--ag-ease), border-color 0.5s var(--ag-ease) !important;
+    }
+
+    .nego-card:hover {
+      transform: translateY(-6px) !important;
+      box-shadow: var(--ag-shadow-hover), 0 0 16px rgba(184, 134, 11, 0.12) !important;
+      border-color: var(--gold) !important;
+    }
+
+    .sim-card {
+      background: rgba(242, 237, 228, 0.45) !important;
+      /* blur removed */
+      border: 1.5px solid rgba(221, 213, 196, 0.4) !important;
+      box-shadow: var(--ag-shadow-float);
+      transition: transform 0.5s var(--ag-ease), box-shadow 0.5s var(--ag-ease), border-color 0.5s var(--ag-ease);
+    }
+
+    .sim-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--ag-shadow-hover);
+      border-color: rgba(184, 134, 11, 0.25) !important;
+    }
+
+    .market-pos {
+      background: rgba(242, 237, 228, 0.5) !important;
+      /* blur removed */
+      border-left: 3px solid var(--gold) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: transform 0.45s var(--ag-ease), box-shadow 0.45s var(--ag-ease), border-color 0.45s var(--ag-ease), background 0.45s var(--ag-ease);
+    }
+
+    .market-pos:hover {
+      transform: translateX(4px);
+      box-shadow: var(--ag-shadow-float);
+    }
+
+    .reason-item {
+      transition: transform 0.4s var(--ag-ease), box-shadow 0.4s var(--ag-ease), background 0.4s var(--ag-ease);
+      padding: 14px 8px !important;
+      border-radius: 8px;
+      margin: 0 -8px;
+    }
+
+    .reason-item:hover {
+      background: rgba(242, 237, 228, 0.5);
+      transform: translateX(6px);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .reason-icon {
+      /* blur removed */
+      background: rgba(242, 237, 228, 0.6) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: transform 0.4s var(--ag-ease), box-shadow 0.4s var(--ag-ease), background 0.4s var(--ag-ease);
+    }
+
+    .reason-item:hover .reason-icon {
+      transform: scale(1.1);
+      box-shadow: var(--ag-glow);
+    }
+
+    .impact-tag,
+    .sim-factor-tag {
+      transition: transform 0.35s var(--ag-ease), box-shadow 0.35s var(--ag-ease);
+    }
+
+    .impact-tag:hover {
+      transform: scale(1.08);
+    }
+
+    .share-btn {
+      background: rgba(242, 237, 228, 0.5) !important;
+      /* blur removed */
+      border: 1.5px solid rgba(221, 213, 196, 0.5) !important;
+      transition: transform 0.45s var(--ag-ease), box-shadow 0.45s var(--ag-ease), border-color 0.45s var(--ag-ease), background 0.45s var(--ag-ease) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .share-btn:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: var(--ag-shadow-float) !important;
+    }
+
+    .forecast-intro,
+    .sim-intro {
+      background: rgba(242, 237, 228, 0.5) !important;
+      /* blur removed */
+      border-left: 3px solid var(--gold) !important;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+      transition: transform 0.45s var(--ag-ease), box-shadow 0.45s var(--ag-ease), border-color 0.45s var(--ag-ease), background 0.45s var(--ag-ease);
+    }
+
+    .forecast-intro:hover,
+    .sim-intro:hover {
+      transform: translateX(4px);
+      box-shadow: var(--ag-shadow-float);
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      transition: transform 0.35s var(--ag-ease), box-shadow 0.35s var(--ag-ease) !important;
+      box-shadow: 0 0 0 1.5px var(--gold), 0 2px 8px rgba(184, 134, 11, 0.2) !important;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.25) !important;
+      box-shadow: 0 0 0 2px var(--gold), var(--ag-glow) !important;
+    }
+
+    input.sim-range::-webkit-slider-thumb {
+      box-shadow: 0 0 0 2px var(--gold), 0 2px 8px rgba(184, 134, 11, 0.2) !important;
+      transition: transform 0.35s var(--ag-ease), box-shadow 0.35s var(--ag-ease) !important;
+    }
+
+    input.sim-range::-webkit-slider-thumb:hover {
+      transform: scale(1.2) !important;
+      box-shadow: 0 0 0 2.5px var(--gold), var(--ag-glow) !important;
+    }
+
+    .price-hero {
+      position: relative;
+    }
+
+    .price-main {
+      background: linear-gradient(135deg, var(--ink) 0%, #3D3530 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
+    }
+
+    .needle-line {
+      transition: left 1s var(--ag-ease) !important;
+    }
+
+    .needle-dot {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14), 0 0 12px rgba(184, 134, 11, 0.15) !important;
+    }
+
+    .needle-tag {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .score-big {
+      text-shadow: 0 2px 12px rgba(184, 134, 11, 0.2);
+      transition: transform 0.4s var(--ag-ease), box-shadow 0.4s var(--ag-ease), background 0.4s var(--ag-ease);
+    }
+
+    .logo-name {
+      transition: transform 0.5s var(--ag-ease), box-shadow 0.5s var(--ag-ease), border-color 0.5s var(--ag-ease);
+    }
+
+    .logo-name em {
+      text-shadow: 0 0 20px rgba(184, 134, 11, 0.15);
+    }
+
+    .forecast-table tr {
+      transition: transform 0.35s var(--ag-ease), box-shadow 0.35s var(--ag-ease);
+    }
+
+    .forecast-table tr:hover td {
+      background: rgba(253, 248, 232, 0.4);
+    }
+
+    .forecast-table .now-row td {
+      background: rgba(253, 248, 232, 0.6) !important;
+    }
+
+    .no-model-notice {
+      /* blur removed */
+      transition: transform 0.4s var(--ag-ease), box-shadow 0.4s var(--ag-ease), background 0.4s var(--ag-ease);
+    }
+
+    @keyframes agFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes agFloatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+        /* perf: blur removed */
+        ;
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        /* perf: blur removed */
+        ;
+      }
+    }
+
+    .au {
+      animation: fadeUp 0.7s var(--ag-ease) forwards !important;
+      opacity: 0;
+    }
+
+    .d1 {
+      animation-delay: 0.05s !important;
+    }
+
+    .d2 {
+      animation-delay: 0.15s !important;
+    }
+
+    .d3 {
+      animation-delay: 0.25s !important;
+    }
+
+    .d4 {
+      animation-delay: 0.35s !important;
+    }
+
+    .d5 {
+      animation-delay: 0.45s !important;
+    }
+
+    @keyframes prng {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(1.06) rotate(3deg);
+      }
+    }
+
+    .sim-factor-bar-fill {
+      transition: width 0.7s var(--ag-ease) !important;
+    }
+
+    .spectrum-track {
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .form-divider {
+      background: linear-gradient(90deg, transparent, var(--border), var(--gold-lt), var(--border), transparent) !important;
+      height: 1px;
+      opacity: 0.7;
+    }
+
+    .form-panel::-webkit-scrollbar,
+    .result-panel::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .form-panel::-webkit-scrollbar-track,
+    .result-panel::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .form-panel::-webkit-scrollbar-thumb,
+    .result-panel::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    .form-panel::-webkit-scrollbar-thumb:hover,
+    .result-panel::-webkit-scrollbar-thumb:hover {
+      background: var(--gold);
+    }
+
+    @media(max-width:860px) {
+      .form-panel {
+        border-right: none !important;
+        border-bottom: 1.5px solid var(--ag-glass-border) !important;
+      }
+
+      .btn-predict {
+        animation: none;
+      }
+
+      .btn-predict:hover {
+        transform: translateY(-2px) !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div>
+      <div class="logo-eyebrow">Định giá thông minh · 1,409 mẫu thực tế</div>
+      <div class="logo-name">Moto<em>Market</em></div>
+    </div>
+    <div class="hdr-stats">
+      <p>Dữ liệu <strong>1.374 mẫu</strong> · Cập nhật mới nhất</p>
+      <p>Mô hình <strong>Linear Regression · Python</strong></p>
+      <p><strong>25</strong> hãng · <strong>100+</strong> dòng xe có dữ liệu</p>
+    </div>
+  </header>
+
+  <div class="app">
+    <!-- FORM -->
+    <div class="form-panel">
+      <div class="panel-title">
+        <div class="eyebrow">Nhập thông tin</div>
+        <h2>Xe của bạn</h2>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Hãng xe</label>
+          <select id="brand" onchange="updateModels()">
+            <option value="">Chọn hãng</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Dòng xe</label>
+          <select id="model" onchange="onModelChange()">
+            <option value="">Chọn dòng</option>
+          </select>
+          <div class="no-model-notice" id="noModelNotice">
+            Dòng xe này chưa có dữ liệu. Vui lòng chọn dòng khác.
+          </div>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Năm sản xuất</label>
+          <input type="number" id="year" min="2010" max="2026" placeholder="2020">
+        </div>
+        <div class="field">
+          <label>Số KM đã chạy</label>
+          <input type="number" id="km" min="0" placeholder="20000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Khu vực bán</label>
+        <select id="region">
+          <option value="">Chọn khu vực</option>
+          <option value="hcm">TP. Hồ Chí Minh</option>
+          <option value="hn">Hà Nội</option>
+          <option value="other">Các tỉnh / Thành phố khác</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Tình trạng xe</label>
+        <div class="cond-grid">
+          <div class="cond-pill active" onclick="setCond(this,'zin')">
+            <span class="pill-icon">✨</span>
+            <span class="pill-name">Zin 100%</span>
+            <span class="pill-fx">+15% giá trị</span>
+          </div>
+          <div class="cond-pill" onclick="setCond(this,'worn')">
+            <span class="pill-icon">🔧</span>
+            <span class="pill-name">Đã thay phụ tùng</span>
+            <span class="pill-fx">Mức chuẩn</span>
+          </div>
+          <div class="cond-pill" onclick="setCond(this,'engine')">
+            <span class="pill-icon">⚙️</span>
+            <span class="pill-name">Can thiệp động cơ</span>
+            <span class="pill-fx">−10% giá trị</span>
+          </div>
+          <div class="cond-pill" onclick="setCond(this,'accident')">
+            <span class="pill-icon">💥</span>
+            <span class="pill-name">Đã đâm đụng</span>
+            <span class="pill-fx">−25% giá trị</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Tự đánh giá tình trạng (1–5)</label>
+        <div class="score-row">
+          <div class="score-big" id="scoreNum">3</div>
+          <div>
+            <div class="score-lbl" id="scoreDesc">Trung bình</div>
+            <input type="range" id="score" min="1" max="5" value="3" step="1" oninput="updateScore(this.value)">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+      <button class="btn-predict" onclick="runPredict()">Dự đoán giá bán →</button>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-panel">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-rings">
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring-center">🏍</div>
+        </div>
+        <div class="empty-title">Sẵn sàng định giá</div>
+        <p class="empty-sub">Điền thông tin xe và nhấn <strong>Dự đoán giá bán</strong></p>
+      </div>
+
+      <div id="resultWrapper" style="display:none; flex:1; display:none; flex-direction:column;">
+        <div class="tabs-bar">
+          <button class="tab-btn active" onclick="switchTab(0)">📊 Định giá</button>
+          <button class="tab-btn" onclick="switchTab(1)">📉 Dự báo tương lai</button>
+          <button class="tab-btn" onclick="switchTab(2)">🎛 Mô phỏng giá</button>
+        </div>
+
+        <!-- TAB 0: ĐỊNH GIÁ -->
+        <div class="tab-content active" id="tab0">
+          <div class="price-hero au d1">
+            <div class="price-eyebrow" id="t0eyebrow">Giá dự đoán</div>
+            <div class="price-main" id="priceNum">—</div>
+            <div class="price-unit">Đồng Việt Nam</div>
+            <div class="price-xe" id="t0xeinfo"></div>
+          </div>
+          <div id="t0market"></div>
+          <div id="t0reasons"></div>
+          <div id="t0nego"></div>
+          <div class="share-bar">
+            <button class="share-btn" id="copyBtn" onclick="copyResult()">📋 Sao chép kết quả</button>
+            <button class="share-btn" onclick="window.print()">🖨️ In kết quả</button>
+          </div>
+        </div>
+
+        <!-- TAB 1: DỰ BÁO -->
+        <div class="tab-content" id="tab1">
+          <div class="forecast-intro" id="fc-intro"></div>
+          <div class="forecast-chart-wrap">
+            <svg class="fc-svg" id="fcSvg" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet"></svg>
+            <div class="fc-legend">
+              <div class="fc-legend-item">
+                <div class="fc-legend-line hist"></div><span>Lịch sử (dữ liệu thực)</span>
+              </div>
+              <div class="fc-legend-item">
+                <div class="fc-legend-line future"></div><span>Dự báo 5 năm tới</span>
+              </div>
+            </div>
+          </div>
+          <div class="sec-head">
+            <h3>Bảng dự báo chi tiết</h3><span>theo năm</span>
+          </div>
+          <div class="chart-box">
+            <table class="forecast-table" id="fcTable"></table>
+          </div>
+        </div>
+
+        <!-- TAB 2: MÔ PHỎNG -->
+        <div class="tab-content" id="tab2">
+          <div class="sim-intro">
+            Kéo các thanh trượt để thấy ngay giá xe thay đổi thế nào theo số km và tình trạng bảo dưỡng.
+          </div>
+          <div class="sim-controls">
+            <div class="sim-ctrl-row">
+              <div class="sim-ctrl-top">
+                <span class="sim-ctrl-label">Số KM odometer</span>
+                <span class="sim-ctrl-val" id="simKmVal">—</span>
+              </div>
+              <input type="range" class="sim-range" id="simKmSlider" min="0" max="150000" step="1000"
+                oninput="updateSim()">
+            </div>
+            <div class="sim-ctrl-row">
+              <div class="sim-ctrl-top">
+                <span class="sim-ctrl-label">Tình trạng bảo dưỡng</span>
+                <span class="sim-ctrl-val" id="simCondVal">—</span>
+              </div>
+              <input type="range" class="sim-range" id="simCondSlider" min="0" max="3" step="1" oninput="updateSim()">
+            </div>
+            <div class="sim-ctrl-row">
+              <div class="sim-ctrl-top">
+                <span class="sim-ctrl-label">Điểm tự đánh giá</span>
+                <span class="sim-ctrl-val" id="simScoreVal">—</span>
+              </div>
+              <input type="range" class="sim-range" id="simScoreSlider" min="1" max="5" step="1" oninput="updateSim()">
+            </div>
+          </div>
+
+          <div class="sim-result-panel">
+            <div class="sim-card">
+              <div class="sim-card-label">Giá hiện tại</div>
+              <div class="sim-card-val highlight" id="simBasePrice">—</div>
+              <div class="sim-card-sub" id="simBaseInfo"></div>
+            </div>
+            <div class="sim-card">
+              <div class="sim-card-label">Giá sau điều chỉnh</div>
+              <div class="sim-card-val" id="simNewPrice">—</div>
+              <div class="sim-card-sub" id="simDeltaInfo"></div>
+            </div>
+          </div>
+
+          <div class="sim-bar-wrap">
+            <div class="sim-bar-title">Tác động từng yếu tố</div>
+            <div id="simFactors"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ── LOAD BRANDS FROM SERVER ── */
+    fetch('/brands').then(r => r.json()).then(data => {
+      window.BRAND_MODELS = data.brandModels;
+      window.MODEL_CNT    = data.modelCnt;
+
+      const sel = document.getElementById('brand');
+      Object.keys(BRAND_MODELS).sort().forEach(b => {
+        const o = document.createElement('option');
+        o.value = o.textContent = b;
+        sel.appendChild(o);
+      });
+    });
+
+    /* ── Constants ── */
+    const COND_MULT  = { zin: 1.0, worn: 0.87, engine: 0.78, accident: 0.62 };
+    const COND_ORDER = ['zin', 'worn', 'engine', 'accident'];
+    const REG_MULT   = { hcm: 1.05, hn: 1.0, other: 0.93 };
+    const SCORE_LABEL= { 1: "Kém", 2: "Yếu", 3: "Trung bình", 4: "Khá tốt", 5: "Rất tốt" };
+    const COND_LABEL = { zin: "Zin 100%", worn: "Đã thay phụ tùng hao mòn", engine: "Đã can thiệp động cơ", accident: "Đã từng đâm đụng / tai nạn" };
+    const DEP_RATES  = { 1: 0.12, 2: 0.10, 3: 0.09, 4: 0.08, 5: 0.07 };
+    let selectedCond = 'zin', lastResult = null, activeTab = 0;
+
+    /* ── UI helpers ── */
+    function updateModels() {
+      const b = document.getElementById('brand').value;
+      const ms = document.getElementById('model');
+      document.getElementById('noModelNotice').classList.remove('show');
+      ms.innerHTML = '<option value="">Chọn dòng</option>';
+      if (b && window.BRAND_MODELS && window.BRAND_MODELS[b]) {
+        const models = [...window.BRAND_MODELS[b]].sort((a, z) =>
+          (window.MODEL_CNT[`${b}||${z}`] || 0) - (window.MODEL_CNT[`${b}||${a}`] || 0)
+        );
+        models.forEach(m => {
+          const o = document.createElement('option'); o.value = m; o.textContent = m; ms.appendChild(o);
+        });
+      }
+    }
+    function onModelChange() { document.getElementById('noModelNotice').classList.remove('show'); }
+    function setCond(el, key) {
+      document.querySelectorAll('.cond-pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active'); selectedCond = key;
+    }
+    function updateScore(v) {
+      document.getElementById('scoreNum').textContent = v;
+      document.getElementById('scoreDesc').textContent = SCORE_LABEL[v];
+    }
+    function switchTab(i) {
+      document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', j===i));
+      document.querySelectorAll('.tab-content').forEach((c,j) => c.classList.toggle('active', j===i));
+      activeTab = i;
+    }
+
+    /* ── Format ── */
+    function fmt(p)  { return (p/1e6).toFixed(1) + ' triệu'; }
+    function fmtI(p) { return Math.round(p/1e6) + ' triệu'; }
+
+    /* ── Depreciation (client-side for chart) ── */
+    function projectPrice(basePrice, yearsAhead, depData) {
+      if (depData) {
+        const row = depData.find(d => d.year === 2026 + yearsAhead);
+        return row ? row.price : basePrice;
+      }
+      let p = basePrice;
+      for (let i = 1; i <= yearsAhead; i++) p *= (1 - (DEP_RATES[i] || 0.07));
+      return Math.round(p);
+    }
+
+    /* ── Forecast chart SVG ── */
+    function buildForecastChart(inp, predicted, depData) {
+      const byY = {};
+      // No client-side DATA anymore — skip historical line
+      const curYear = 2026;
+      const futureYears  = [2026,2027,2028,2029,2030,2031];
+      const futurePrices = futureYears.map(y => projectPrice(predicted, y-curYear, depData));
+
+      const W=600,H=200,PL=60,PR=20,PT=20,PB=36;
+      const allPrices = futurePrices;
+      const minP = Math.min(...allPrices)*.85;
+      const maxP = Math.max(...allPrices)*1.08;
+      const chartW=W-PL-PR, chartH=H-PT-PB;
+      const minY=curYear, maxY=2031;
+      function xOf(y){ return PL+(y-minY)/(maxY-minY)*chartW; }
+      function yOf(p){ return PT+chartH-(p-minP)/(maxP-minP)*chartH; }
+
+      let svg='';
+      for(let i=0;i<=4;i++){
+        const y=PT+i*(chartH/4), val=Math.round(maxP-(i/4)*(maxP-minP));
+        svg+=`<line x1="${PL}" x2="${W-PR}" y1="${y}" y2="${y}" stroke="var(--border)" stroke-width="1"/>`;
+        svg+=`<text x="${PL-6}" y="${y+4}" text-anchor="end" class="fc-axis-label">${Math.round(val/1e6)}tr</text>`;
+      }
+      futureYears.forEach(y=>{
+        svg+=`<text x="${xOf(y)}" y="${H-4}" text-anchor="middle" class="fc-axis-label">${y}</text>`;
+      });
+      const xNow=xOf(curYear);
+      svg+=`<line x1="${xNow}" x2="${xNow}" y1="${PT}" y2="${H-PB}" stroke="var(--rust)" stroke-width="1.5" stroke-dasharray="3,3" opacity=".6"/>`;
+      svg+=`<text x="${xNow+4}" y="${PT+10}" class="fc-axis-label" fill="var(--rust)">Hiện tại</text>`;
+
+      const fPts=futureYears.map((y,i)=>`${xOf(y)},${yOf(futurePrices[i])}`).join(' ');
+      svg+=`<polygon points="${xOf(2026)},${H-PB} ${fPts} ${xOf(2031)},${H-PB}" class="fc-area-future"/>`;
+      svg+=`<polyline points="${fPts}" class="fc-line-future"/>`;
+      futureYears.forEach((y,i)=>{
+        svg+=`<circle cx="${xOf(y)}" cy="${yOf(futurePrices[i])}" r="${i===0?5:4}" class="${i===0?'fc-dot-now':'fc-dot-future'}"/>`;
+      });
+      document.getElementById('fcSvg').innerHTML=svg;
+
+      const totalDep=Math.round((1-projectPrice(predicted,5,depData)/predicted)*100);
+      document.getElementById('fc-intro').innerHTML=
+        `Dự báo mất giá cho <strong>${inp.brand} ${inp.model}</strong>. Xe dự kiến mất khoảng <strong>${totalDep}%</strong> giá trị trong 5 năm tới.`;
+
+      const rows=[2026,2027,2028,2029,2030,2031].map((y,i)=>{
+        const p=projectPrice(predicted,i,depData), dep=i===0?0:Math.round((1-p/predicted)*100), isNow=i===0;
+        return `<tr class="${isNow?'now-row':''}"><td>${y}${isNow?' (hiện tại)':''}</td><td>${isNow?'—':dep+'% mất giá'}</td><td>${fmt(p)}</td></tr>`;
+      }).join('');
+      document.getElementById('fcTable').innerHTML=`<tr><th>Năm</th><th>Độ mất giá</th><th>Giá ước tính</th></tr>${rows}`;
+    }
+
+    /* ── Simulator ── */
+    let simBase=null;
+    function initSim(inp, predicted) {
+      simBase={inp,predicted};
+      document.getElementById('simKmSlider').value=inp.km;
+      document.getElementById('simKmSlider').max=Math.max(150000,inp.km*1.5);
+      document.getElementById('simCondSlider').value=COND_ORDER.indexOf(inp.condition);
+      document.getElementById('simScoreSlider').value=inp.score;
+      updateSim();
+    }
+    function updateSim() {
+      if (!simBase) return;
+      const {inp} = simBase;
+      const km=parseInt(document.getElementById('simKmSlider').value);
+      const condIdx=parseInt(document.getElementById('simCondSlider').value);
+      const score=parseInt(document.getElementById('simScoreSlider').value);
+      const cond=COND_ORDER[condIdx];
+      document.getElementById('simKmVal').textContent=km.toLocaleString('vi-VN')+' km';
+      document.getElementById('simCondVal').textContent=COND_LABEL[cond];
+      document.getElementById('simScoreVal').textContent=`${score}/5 — ${SCORE_LABEL[score]}`;
+
+      const newInp={...inp, km, condition:cond, score};
+      fetch('/predict',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(newInp)})
+        .then(r=>r.json()).then(res=>{
+          const np=res.predicted, op=simBase.predicted;
+          const diff=np-op, pct=((diff/op)*100).toFixed(1);
+          const sign=diff>=0?'+':'';
+
+          function buildFactor(label,oldVal,newVal,min,max,invert){
+            const range=max-min||1;
+            const oldPct=Math.max(0,Math.min(100,Math.round((oldVal-min)/range*100)));
+            const newPct=Math.max(0,Math.min(100,Math.round((newVal-min)/range*100)));
+            const impact=invert?(oldPct-newPct):(newPct-oldPct);
+            const cls=impact>5?'pos':impact<-5?'neg':'neu';
+            return `<div class="sim-factor">
+              <div class="sim-factor-head"><span class="sim-factor-label">${label}</span><span class="sim-factor-impact impact-${cls}">${impact>0?'+':''}${impact}%</span></div>
+              <div class="sim-factor-bar"><div class="sim-factor-bar-fill" style="width:${newPct}%;background:var(${cls==='pos'?'--sage':cls==='neg'?'--rust':'--gold'})"></div></div>
+            </div>`;
+          }
+
+          document.getElementById('simResult').innerHTML=`<div class="sim-result-panel">
+            <div class="sim-card ${diff>=0?'sim-card-pos':'sim-card-neg'}">
+              <div class="sim-card-label">Giá mới dự đoán</div>
+              <div class="sim-card-price">${fmt(np)}</div>
+              <div class="sim-card-diff">${sign}${fmt(Math.abs(diff))} (${sign}${pct}%)</div>
+            </div>
+            <div class="sim-factors">
+              ${buildFactor('Số KM',inp.km,km,0,150000,true)}
+              ${buildFactor('Tình trạng',COND_ORDER.indexOf(inp.condition),condIdx,0,3,true)}
+              ${buildFactor('Đánh giá',inp.score,score,1,5)}
+            </div>
+          </div>`;
+        });
+    }
+
+    /* ── Helpers for renderResult ── */
+    function buildReasons(inp) {
+      const r=[];
+      const cm={zin:{detail:'Xe nguyên bản, chưa can thiệp — cao giá nhất',cls:'pos',tag:'+15%'},worn:{detail:'Đã thay phụ tùng hao mòn — mức chuẩn thị trường',cls:'neu',tag:'Chuẩn'},engine:{detail:'Đã can thiệp động cơ — giảm giá trị đáng kể',cls:'neg',tag:'−10%'},accident:{detail:'Từng đâm đụng / tai nạn — ảnh hưởng lớn đến giá',cls:'neg',tag:'−25%'}};
+      r.push({icon:'🔩',name:`Tình trạng: ${COND_LABEL[inp.condition]}`,detail:cm[inp.condition].detail,cls:cm[inp.condition].cls,tag:cm[inp.condition].tag});
+      const ageBracket=2026-inp.year;
+      r.push({icon:'🗓',name:`Năm ${inp.year} (${ageBracket} tuổi)`,detail:ageBracket<=2?'Xe gần như mới — ít hao giá':ageBracket<=5?'Xe còn khá mới':ageBracket<=10?'Xe đã qua sử dụng đáng kể':'Xe cũ — giá trị còn tùy dòng xe',cls:ageBracket<=2?'pos':ageBracket<=5?'neu':'neg',tag:ageBracket<=2?'Rất mới':ageBracket<=5?'Khá mới':'Đã cũ'});
+      const kmBracket=inp.km<10000?'pos':inp.km<50000?'neu':'neg';
+      r.push({icon:'🛣',name:`${inp.km.toLocaleString('vi-VN')} km`,detail:inp.km<10000?'Xe ít chạy — giá trị cao':inp.km<50000?'Mức km bình thường':'Xe chạy nhiều — ảnh hưởng giá trị',cls:kmBracket,tag:inp.km<10000?'Ít chạy':inp.km<50000?'Bình thường':'Chạy nhiều'});
+      const sm={1:{detail:'Tình trạng kém — cần đánh giá kỹ',cls:'neg',tag:'Kém'},2:{detail:'Tình trạng yếu — nhiều vấn đề cần chú ý',cls:'neg',tag:'Yếu'},3:{detail:'Tình trạng trung bình — mức phổ biến',cls:'neu',tag:'TB'},4:{detail:'Tình trạng khá tốt — xe được bảo dưỡng tốt',cls:'pos',tag:'Khá'},5:{detail:'Tình trạng rất tốt — ít hao mòn',cls:'pos',tag:'Tốt'}};
+      r.push({icon:'⭐',name:`Tự đánh giá: ${inp.score}/5`,detail:sm[inp.score].detail,cls:sm[inp.score].cls,tag:sm[inp.score].tag});
+      const rm={hcm:{detail:'TP.HCM — thị trường xe nhộn nhịp nhất, giá cao hơn ~5%',cls:'pos',tag:'+5%'},hn:{detail:'Hà Nội — thị trường lớn, ổn định, mức giá tham chiếu',cls:'neu',tag:'Chuẩn'},other:{detail:'Tỉnh / thành khác — thị trường nhỏ hơn, giá thường thấp hơn 7–8%',cls:'neg',tag:'−7%'}};
+      const rd=rm[inp.region]||rm.other;
+      const regName=inp.region==='hcm'?'TP. Hồ Chí Minh':inp.region==='hn'?'Hà Nội':'Tỉnh / Thành phố khác';
+      r.push({icon:'📍',name:`Khu vực: ${regName}`,detail:rd.detail,cls:rd.cls,tag:rd.tag});
+      return r;
+    }
+    function buildNego(predicted, marketPrices) {
+      const avg=marketPrices.length?Math.round(marketPrices.reduce((a,b)=>a+b,0)/marketPrices.length):predicted;
+      return [
+        {icon:'💡',title:'Giá niêm yết đề xuất',body:`Đăng bán ở <strong>${fmt(Math.round(predicted*1.06))}</strong> để còn không gian thương lượng.`,price:Math.round(predicted*1.06)},
+        {icon:'🎯',title:'Giá chốt mục tiêu',body:`Mức hợp lý nhất theo mô hình là <strong>${fmt(predicted)}</strong>.`,price:predicted},
+        {icon:'🤝',title:'Giá thấp nhất chấp nhận',body:`Không nên xuống dưới <strong>${fmt(Math.round(predicted*0.92))}</strong>.`,price:Math.round(predicted*0.92)},
+        {icon:'📊',title:'Giá trung bình thị trường',body:`Xe tương tự đang ở mức trung bình <strong>${fmtI(avg)}</strong>.`,price:avg}
+      ];
+    }
+    function copyResult() {
+      if (!lastResult) return;
+      const {inp,predicted,marketPrices}=lastResult;
+      const avg=marketPrices.length?Math.round(marketPrices.reduce((a,b)=>a+b,0)/marketPrices.length):predicted;
+      const regName=inp.region==='hcm'?'TP. Hồ Chí Minh':inp.region==='hn'?'Hà Nội':'Tỉnh / Thành phố khác';
+      const txt=[`🏍 MotoMarket — Kết quả định giá`,`Xe: ${inp.brand} ${inp.model} (${inp.year})`,
+        `Số km: ${inp.km.toLocaleString('vi-VN')} km · ${COND_LABEL[inp.condition]}`,
+        `Khu vực: ${regName}`,``,`💰 Giá dự đoán: ${fmt(predicted)}`,`📊 Giá TB thị trường: ${fmtI(avg)}`,``,
+        `Giá niêm yết đề xuất: ${fmt(Math.round(predicted*1.06))}`,
+        `Giá chốt mục tiêu: ${fmt(predicted)}`,
+        `Giá thấp nhất: ${fmt(Math.round(predicted*0.92))}`,``,
+        `— MotoMarket · Linear Regression · Python`].join('\n');
+      navigator.clipboard.writeText(txt).then(()=>{
+        const btn=document.getElementById('copyBtn');
+        btn.textContent='✓ Đã sao chép'; btn.classList.add('done');
+        setTimeout(()=>{btn.textContent='📋 Sao chép kết quả';btn.classList.remove('done');},2500);
+      }).catch(()=>alert(txt));
+    }
+
+    /* ── MAIN RENDER ── */
+    function renderResult(inp, predicted, marketPrices, depData, nSamples) {
+      lastResult={inp,predicted,marketPrices};
+      document.getElementById('t0eyebrow').textContent=`Giá dự đoán · ${nSamples} mẫu ${inp.brand} ${inp.model}`;
+      document.getElementById('t0xeinfo').textContent=`${inp.brand} ${inp.model} · ${inp.year} · ${inp.km.toLocaleString('vi-VN')} km`;
+
+      // Market bar
+      let mktHtml='';
+      if (marketPrices.length>=3){
+        const mn=Math.min(...marketPrices),mx=Math.max(...marketPrices);
+        const pct=Math.max(5,Math.min(95,Math.round((predicted-mn)/(mx-mn+1)*100)));
+        let posL,posS;
+        if(pct<25){posL='Dưới mức thị trường';posS='Giá cạnh tranh, dễ bán nhanh';}
+        else if(pct<50){posL='Gần mức trung bình';posS='Phù hợp với đa số người mua';}
+        else if(pct<75){posL='Trên mức trung bình';posS='Cần nhấn mạnh ưu điểm xe khi thương lượng';}
+        else{posL='Top thị trường';posS='Chỉ phù hợp khi xe thực sự ở tình trạng tốt nhất';}
+        mktHtml=`<div class="market-section au d2">
+          <div class="sec-head"><h3>Vị trí thị trường</h3><span>${marketPrices.length} xe tham chiếu</span></div>
+          <div class="chart-box"><div class="spectrum-wrap">
+            <div class="spectrum-track"><div class="needle-line" style="left:${pct}%">
+              <div class="needle-tag">${fmt(predicted)}</div><div class="needle-dot"></div>
+            </div></div>
+            <div class="spectrum-ends">
+              <div class="spec-end">Thấp nhất<strong>${fmt(mn)}</strong></div>
+              <div class="spec-end" style="text-align:right">Cao nhất<strong>${fmt(mx)}</strong></div>
+            </div>
+          </div></div>
+          <div class="market-pos"><div class="mpos-icon">📊</div>
+            <div><div class="mpos-title">${posL}</div><div class="mpos-sub">${posS}</div></div>
+          </div></div>`;
+      }
+      document.getElementById('t0market').innerHTML=mktHtml;
+
+      const reasons=buildReasons(inp);
+      document.getElementById('t0reasons').innerHTML=`<div class="reasons-section au d3">
+        <div class="sec-head"><h3>Lý do định giá</h3><span>5 yếu tố</span></div>
+        ${reasons.map(r=>`<div class="reason-item">
+          <div class="reason-icon">${r.icon}</div>
+          <div><div class="reason-name">${r.name}</div><div class="reason-detail">${r.detail}</div></div>
+          <div><span class="impact-tag tag-${r.cls}">${r.tag}</span></div>
+        </div>`).join('')}
+      </div>`;
+
+      const nego=buildNego(predicted,marketPrices);
+      document.getElementById('t0nego').innerHTML=`<div class="nego-section au d4">
+        <div class="sec-head"><h3>Chiến lược thương lượng</h3><span>Gợi ý giá</span></div>
+        <div class="nego-grid">${nego.map(t=>`<div class="nego-card">
+          <div class="nego-icon">${t.icon}</div><div class="nego-title">${t.title}</div>
+          <div class="nego-body">${t.body}</div><div class="nego-price">${fmt(t.price)}</div>
+        </div>`).join('')}</div>
+      </div>`;
+
+      setTimeout(()=>buildForecastChart(inp,predicted,depData),50);
+      initSim(inp,predicted);
+
+      document.getElementById('emptyState').style.display='none';
+      const rw=document.getElementById('resultWrapper');
+      rw.style.display='flex';
+
+      const el=document.getElementById('priceNum');
+      const dur=750, t0=performance.now();
+      (function tick(now){
+        const t=Math.min((now-t0)/dur,1), e=1-Math.pow(1-t,3);
+        el.textContent=fmt(Math.round(predicted*e));
+        if(t<1) requestAnimationFrame(tick); else el.textContent=fmt(predicted);
+      })(performance.now());
+
+      switchTab(0);
+    }
+
+    /* ── MAIN: gọi Flask backend ── */
+    function runPredict() {
+      const brand   = document.getElementById('brand').value;
+      const model   = document.getElementById('model').value;
+      const year    = parseInt(document.getElementById('year').value);
+      const km      = parseInt(document.getElementById('km').value);
+      const region  = document.getElementById('region').value;
+      const score   = parseInt(document.getElementById('score').value);
+
+      let err=false;
+      ['brand','year','km','region'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(!el.value){el.classList.add('err');err=true;}
+        else el.classList.remove('err');
+      });
+      if(!model){document.getElementById('model').classList.add('err');err=true;}
+      else document.getElementById('model').classList.remove('err');
+      if(err||isNaN(km)||isNaN(year)) return;
+
+      const MODEL_CNT = window.MODEL_CNT || {};
+      const n=MODEL_CNT[`${brand}||${model}`]||0;
+      if(n===0){
+        document.getElementById('noModelNotice').classList.add('show');
+        document.getElementById('model').classList.add('err');
+        return;
+      }
+
+      const inp={brand,model,year,km,region,condition:selectedCond,score};
+
+      // Gọi Python backend
+      fetch('/predict',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(inp)
+      }).then(r=>r.json()).then(res=>{
+        if(res.error){alert(res.error);return;}
+        renderResult(inp, res.predicted, res.marketPrices, res.depreciation, res.nSamples);
+        // Update header badge
+        document.querySelector('.hdr-stats p:nth-child(2)').innerHTML=
+          `Mô hình <strong>Linear Regression · Python</strong> · R²=${res.r2}`;
+      }).catch(e=>{
+        alert('Lỗi kết nối server: '+e.message);
+      });
+    }
+
+  </script>
+  <script>
+    /* ═══ ANTIGRAVITY LUXURY — JS Enhancements ═══ */
+    (function () {
+      'use strict';
+      function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+      function enhancePriceAnimation(predicted) {
+        var el = document.getElementById('priceNum'); if (!el) return;
+        var dur = 1200, t0 = performance.now(), f = window.fmt || function (p) { return (p / 1e6).toFixed(1) + ' triệu'; };
+        function tick(now) { var t = Math.min((now - t0) / dur, 1); el.textContent = f(Math.round(predicted * easeOutExpo(t))); if (t < 1) requestAnimationFrame(tick); else el.textContent = f(predicted); }
+        requestAnimationFrame(tick);
+      }
+      function staggerElements(c, sel, ds) {
+        if (!c) return; var items = c.querySelectorAll(sel);
+        items.forEach(function (item, i) {
+          item.style.opacity = '0'; item.style.transform = 'translateY(16px) scale(0.98)'; // filter removed
+          item.style.transition = 'all 0.6s cubic-bezier(0.22,1,0.36,1) ' + (i * (ds || 0.08)) + 's';
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              item.style.opacity = '1'; item.style.transform = 'translateY(0) scale(1)'; // filter removed
+            });
+          });
+        });
+      }
+      var obs = new MutationObserver(function (muts) {
+        muts.forEach(function (m) {
+          if (m.type === 'childList' && m.addedNodes.length) {
+            var r = document.querySelector('.reasons-section'); if (r && !r.dataset.agDone) { r.dataset.agDone = '1'; staggerElements(r, '.reason-item', 0.08); }
+            var n = document.querySelector('.nego-section'); if (n && !n.dataset.agDone) { n.dataset.agDone = '1'; staggerElements(n, '.nego-card', 0.1); }
+            var ft = document.getElementById('fcTable'); if (ft && !ft.dataset.agDone) { ft.dataset.agDone = '1'; staggerElements(ft, 'tr', 0.07); }
+            var sp = document.querySelector('.sim-result-panel'); if (sp && !sp.dataset.agDone) { sp.dataset.agDone = '1'; staggerElements(sp, '.sim-card', 0.12); }
+          }
+        });
+      });
+      ['resultWrapper', 't0market', 't0reasons', 't0nego'].forEach(function (id) { var el = document.getElementById(id); if (el) obs.observe(el, { childList: true, subtree: true }); });
+      var _orig = window.renderResult;
+      if (_orig) { window.renderResult = function (inp, predicted, mp) { _orig(inp, predicted, mp); setTimeout(function () { enhancePriceAnimation(predicted); }, 20); }; }
+      /* mousemove parallax removed for perf */
+      var ff = document.querySelectorAll('.form-panel .field,.form-panel .cond-grid,.form-panel .score-row,.form-panel .btn-predict');
+      ff.forEach(function (el, i) { el.style.opacity = '0'; el.style.transform = 'translateY(12px)'; el.style.transition = 'all 0.5s cubic-bezier(0.22,1,0.36,1) ' + (0.05 + i * 0.04) + 's'; });
+      setTimeout(function () { ff.forEach(function (el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }); }, 100);
+    })();
+  </script>
+</body>
+
+</html>
